@@ -1,6 +1,11 @@
+import {ImageOutput, InitalPromptBox, QuestionsAndAnswerBox} from "../components";
 
 export const MainPage = () => {
     return (
-        <p>rayaan Irani</p>
+        <>
+            <InitalPromptBox />
+            <ImageOutput />
+            <QuestionsAndAnswerBox />
+        </>
     );
 }
