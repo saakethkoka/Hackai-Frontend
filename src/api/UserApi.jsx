@@ -3,8 +3,7 @@ import axios from 'axios';
 
 const BASE_ENDPOINT = '3.139.106.132:8081/api';
 
-export const questions = async () => {
-
+export const questionsAPI = () => {
     let data = JSON.stringify({
         "prompt": "Tank"
     });
@@ -19,9 +18,9 @@ export const questions = async () => {
         data : data
     };
 
-    axios.request(config)
+    return axios.request(config)
         .then((response) => {
-            console.log(JSON.stringify(response.data));
+            return response.data;
         })
         .catch((error) => {
             console.log(error);
