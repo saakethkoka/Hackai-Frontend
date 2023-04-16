@@ -3,11 +3,9 @@ import axios from 'axios';
 
 const BASE_ENDPOINT = '3.139.106.132:8081/api';
 
-export const questionsAPI = () => {
-export const questions = async (prompt) => {
-
+export const questionsAPI = (prompt) => {
     let data = JSON.stringify({
-        "prompt": {prompt}
+        "prompt": prompt
     });
 
     let config = {

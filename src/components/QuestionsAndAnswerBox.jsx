@@ -10,7 +10,6 @@ export const QuestionsAndAnswerBox = ({ questions, setResponses, responses }) =>
             question: questions[questionIndex].question,
             response: choice,
         };
-        console.log(updatedResponses);
         setResponses(updatedResponses);
     };
 

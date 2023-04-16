@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {ImageOutput, InitalPromptBox, QuestionsAndAnswerBox} from "../components";
+import {ImageOutput, InitialPromptBox, QuestionsAndAnswerBox} from "../components";
 import {questionsAPI} from "../api/UserApi";
 
 export const MainPage = () => {
@@ -7,24 +7,24 @@ export const MainPage = () => {
     const [responses, setResponses] = useState([]);
 
 
-    useEffect(() => {
-        questionsAPI().then((data) => {
-            setQuestions(data.questions);
-            console.log(data);
-        });
-    }, []);
+    // useEffect(() => {
+    //     questionsAPI().then((data) => {
+    //         setQuestions(data.questions);
+    //         console.log(data);
+    //     });
+    // }, []);
 
     const [submittedText, setSubmittedText] = useState("");
 
     const handleTextSubmit = (text) => {
-        setSubmittedText(text);
-        const response = questions(text);
-        console.log(response)
+        questionsAPI(text).then((data) => {
+            setQuestions(data.questions);
+            console.log(data);
+        });
     };
 
     return (
         <>
-            {questions.length > 0 ? <QuestionsAndAnswerBox questions={questions} setResponses={setResponses} responses={responses}/> : <h1>Hi</h1>}
             <div>
                 <h1>Text Input Component</h1>
                 <InitialPromptBox onTextSubmit={handleTextSubmit} />
@@ -35,7 +35,7 @@ export const MainPage = () => {
                     </div>
                 )}
             </div>
-            <QuestionsAndAnswerBox />
+            {questions.length > 0 ? <QuestionsAndAnswerBox questions={questions} setResponses={setResponses} responses={responses}/> : <h1>Hi</h1>}
             <ImageOutput />
         </>
     );
