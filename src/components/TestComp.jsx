@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {questions} from "../api/UserApi";
+import {questionsAPI} from "../api/UserApi";
 
 export default function TestComp() {
     const [question, setQuestion] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await questions();
+        const response = await questionsAPI();
         console.log(response);
     };
 
