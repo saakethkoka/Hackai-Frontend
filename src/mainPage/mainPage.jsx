@@ -5,7 +5,7 @@ import {
   QuestionsAndAnswerBox,
 } from "../components";
 import { questionsAPI, imageAPI } from "../api/UserApi";
-import { Paper } from "@mui/material";
+import { Paper, CircularProgress } from "@mui/material";
 
 export const MainPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -15,30 +15,43 @@ export const MainPage = () => {
   const [submittedImage, setSubmittedImage] = useState("");
   const [prompt, setPrompt] = useState("");
   const [imageUrls, setImageUrls] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTextSubmit = (text) => {
     setPrompt(text);
-    questionsAPI(text).then((data) => {
-      setQuestions(data.questions);
-      console.log(data);
-    });
+    setIsLoading(true);
+    questionsAPI(text)
+      .then((data) => {
+        setQuestions(data.questions);
+        console.log(data);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setImageUrls([]);
-    imageAPI(responses, prompt).then((data) => {
-      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
-    });
-    imageAPI(responses, prompt).then((data) => {
-      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
-    });
-    imageAPI(responses, prompt).then((data) => {
-      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
-    });
-    imageAPI(responses, prompt).then((data) => {
-      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
-    });
+    setIsLoading(true);
+    imageAPI(responses, prompt)
+      .then((data) => {
+        setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
+      })
+      .finally(() => setIsLoading(false));
+    imageAPI(responses, prompt)
+      .then((data) => {
+        setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
+      })
+      .finally(() => setIsLoading(false));
+    imageAPI(responses, prompt)
+      .then((data) => {
+        setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
+      })
+      .finally(() => setIsLoading(false));
+    imageAPI(responses, prompt)
+      .then((data) => {
+        setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const backgroundStyle = {
@@ -63,7 +76,11 @@ export const MainPage = () => {
             </div>
           )}
         </div>
-        {questions.length > 0 ? (
+        {isLoading ? (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <CircularProgress />
+          </div>
+        ) : questions.length > 0 ? (
           <QuestionsAndAnswerBox
             questions={questions}
             setResponses={setResponses}
