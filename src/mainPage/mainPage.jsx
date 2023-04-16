@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { ImageOutput, InitialPromptBox, QuestionsAndAnswerBox } from "../components";
+import {
+  ImageOutput,
+  InitialPromptBox,
+  QuestionsAndAnswerBox,
+} from "../components";
 import { questionsAPI, imageAPI } from "../api/UserApi";
 import { Paper } from "@mui/material";
 
@@ -10,6 +14,7 @@ export const MainPage = () => {
   const [submittedText, setSubmittedText] = useState("");
   const [submittedImage, setSubmittedImage] = useState("");
   const [prompt, setPrompt] = useState("");
+  const [imageUrls, setImageUrls] = useState([]);
 
   const handleTextSubmit = (text) => {
     setPrompt(text);
@@ -21,9 +26,18 @@ export const MainPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(responses);
+    setImageUrls([]);
     imageAPI(responses, prompt).then((data) => {
-      setImage(data.image_url);
+      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
+    });
+    imageAPI(responses, prompt).then((data) => {
+      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
+    });
+    imageAPI(responses, prompt).then((data) => {
+      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
+    });
+    imageAPI(responses, prompt).then((data) => {
+      setImageUrls((prevUrls) => [...prevUrls, data.image_url]);
     });
   };
 
@@ -33,9 +47,14 @@ export const MainPage = () => {
 
   return (
     <div style={backgroundStyle}>
-      <Paper elevation={2} style={{ margin: "auto", padding: "50px", width: "60%"}}>
+      <Paper
+        elevation={2}
+        style={{ margin: "auto", padding: "50px", width: "60%" }}
+      >
         <div style={{ textAlign: "center", paddingBottom: "40px" }}>
-          <h1 style={{ paddingBottom: "20px" }}>What do you want an image of?</h1>
+          <h1 style={{ paddingBottom: "20px" }}>
+            What do you want an image of?
+          </h1>
           <InitialPromptBox onTextSubmit={handleTextSubmit} />
           {submittedText && (
             <div>
@@ -54,7 +73,22 @@ export const MainPage = () => {
         ) : (
           <h1></h1>
         )}
-        <ImageOutput imageURL={image} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            paddingTop: "20px",
+          }}
+        >
+          {imageUrls.map((imageUrl, index) => (
+            <ImageOutput
+              key={index}
+              imageURL={imageUrl}
+              style={{ margin: "10px 0" }}
+            />
+          ))}
+        </div>
       </Paper>
     </div>
   );
