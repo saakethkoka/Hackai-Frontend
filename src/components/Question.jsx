@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
-import { Typography, Radio, RadioGroup, FormControl, FormControlLabel, TextField } from '@mui/material';
+import {
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+  TextField,
+} from '@mui/material';
 
-const Question = ({ question, choices, index, response, handleResponse }) => {
-
+const Question = ({
+  question,
+  choices,
+  index,
+  response,
+  handleResponse,
+}) => {
   const handleChange = (event) => {
     if (event.target.value === 'other') {
       setOtherChecked(true);
@@ -23,11 +35,25 @@ const Question = ({ question, choices, index, response, handleResponse }) => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
       <Typography variant="h5" gutterBottom>
         {question}
       </Typography>
-      <FormControl component="fieldset">
+      <FormControl
+        component="fieldset"
+        style={{
+          width: '30%',
+          margin: '0 auto',
+          textAlign: 'center',
+        }}
+      >
         <RadioGroup
           aria-label="quiz"
           value={response}
@@ -39,12 +65,14 @@ const Question = ({ question, choices, index, response, handleResponse }) => {
               value={choice}
               control={<Radio />}
               label={choice}
+              style={{ margin: '8px' }}
             />
           ))}
           <FormControlLabel
             value="other"
             control={<Radio />}
             label="Other"
+            style={{ margin: '8px' }}
           />
           <TextField
             multiline={false}
@@ -52,6 +80,8 @@ const Question = ({ question, choices, index, response, handleResponse }) => {
             disabled={!otherChecked}
             value={otherInput}
             onChange={handleOtherInputChange}
+            style={{ margin: '8px' }}
+            fullWidth
           />
         </RadioGroup>
       </FormControl>

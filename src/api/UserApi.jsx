@@ -27,6 +27,30 @@ export const questionsAPI = (prompt) => {
         });
 }
 
-export const imageAPI = async () => {
-    return {"image": "https://i.insider.com/5df126b679d7570ad2044f3e?width=2000&format=jpeg&auto=webp"}
+export const imageAPI = async (questions, prompt) => {
+    // 3.139.106.132:8081/api/questions
+    let config = {
+        method: 'POST',
+        maxBodyLength: Infinity,
+        url: `http://3.139.106.132:8081/api/image`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data : {
+            "questions" : questions,
+            "prompt" : prompt
+        }
+    };
+
+
+
+    return axios.request(config)
+        .then((response) => {
+            return response.data;
+        }
+        )
+        .catch((error) => {
+            console.log(error);
+        }
+        );
 }

@@ -9,8 +9,12 @@ export const MainPage = () => {
     const [image, setImage] = useState("");
 
     const [submittedText, setSubmittedText] = useState("");
+    const [submittedImage, setSubmittedImage] = useState("");
+
+    const [prompt, setPrompt] = useState("");
 
     const handleTextSubmit = (text) => {
+        setPrompt(text);
         questionsAPI(text).then((data) => {
             setQuestions(data.questions);
             console.log(data);
@@ -20,8 +24,8 @@ export const MainPage = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(responses);
-        imageAPI().then((data) => {
-            setImage(data.image);
+        imageAPI(responses, prompt).then((data) => {
+            setImage(data.image_url);
         });
     };
 
@@ -37,7 +41,7 @@ export const MainPage = () => {
                     </div>
                 )}
             </div>
-            {questions.length > 0 ? <QuestionsAndAnswerBox questions={questions} setResponses={setResponses} responses={responses} handleSubmit={handleSubmit} /> : <h1>Hi</h1>}
+            {questions.length > 0 ? <QuestionsAndAnswerBox questions={questions} setResponses={setResponses} responses={responses} handleSubmit={handleSubmit} /> : <h1></h1>}
             <ImageOutput imageURL={image}/>
         </>
     );
