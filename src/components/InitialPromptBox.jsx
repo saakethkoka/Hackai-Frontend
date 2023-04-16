@@ -36,7 +36,7 @@ export const InitialPromptBox = ({ onTextSubmit }) => {
                 fullWidth
                 disabled={isImmutable}
             />
-            <Button
+            {isImmutable === false && <Button
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit}
@@ -44,7 +44,7 @@ export const InitialPromptBox = ({ onTextSubmit }) => {
                 disabled={isImmutable}
             >
                 Submit
-            </Button>
+            </Button>}
         </Box>
     );
 };
