@@ -1,4 +1,5 @@
 import {ImageOutput, InitialPromptBox, QuestionsAndAnswerBox} from "../components";
+import {questions, image} from "../api/UserApi";
 import React, { useState } from "react";
 
 export const MainPage = () => {
@@ -6,7 +7,8 @@ export const MainPage = () => {
 
     const handleTextSubmit = (text) => {
         setSubmittedText(text);
-
+        const response = questions(text);
+        console.log(response)
     };
 
     return (
