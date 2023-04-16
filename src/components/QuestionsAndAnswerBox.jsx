@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Question from './Question';
+import { Button } from '@mui/material';
 
 export const QuestionsAndAnswerBox = ({ questions, setResponses, responses, handleSubmit}) => {
 
@@ -27,7 +28,10 @@ export const QuestionsAndAnswerBox = ({ questions, setResponses, responses, hand
                     handleResponse={handleResponse}
                 />
             ))}
-            <button type="submit">Submit</button>
+            <Button variant="contained" color="primary" type="submit" style={{ margin: 'auto', display: 'block' }}>
+                Submit
+            </Button>
+
         </form>
     );
 };

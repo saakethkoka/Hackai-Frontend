@@ -1,7 +1,7 @@
-export const ImageOutput = ({imageURL = ""}) => {
+export const ImageOutput = ({ imageURL = "" }) => {
     return (
-        <>
-            {imageURL && <img src={imageURL} alt=""/>}
-        </>
+        <div style={{ textAlign: "center" }}>
+            {imageURL && <img src={imageURL} alt="" style={{ display: "inline-block" }} />}
+        </div>
     );
 }
