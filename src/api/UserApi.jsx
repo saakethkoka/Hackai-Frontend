@@ -1,14 +1,34 @@
 //TODO: this is where the API is going to be setup
 import axios from 'axios';
 
-const baseEndpoint = '3.139.106.132:8080/api';
+const BASE_ENDPOINT = '3.139.106.132:8081/api';
 
 export const questions = async () => {
-    const response = await axios.post(`${baseEndpoint}/questions`);
-    return response.data;
+
+    let data = JSON.stringify({
+        "prompt": "Tank"
+    });
+
+    let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `http://3.139.106.132:8081/api/questions`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data : data
+    };
+
+    axios.request(config)
+        .then((response) => {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
 export const image = async () => {
-    const response = await axios.post(`${baseEndpoint}/image`);
+    const response = await axios.post(`${BASE_ENDPOINT}/image`);
     return response.data;
 }
