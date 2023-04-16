@@ -1,7 +1,7 @@
-export const ImageOutput = () => {
+export const ImageOutput = ({imageURL = ""}) => {
     return (
         <>
-            <p>This is the image output</p>
+            {imageURL && <img src={imageURL} alt=""/>}
         </>
     );
 }

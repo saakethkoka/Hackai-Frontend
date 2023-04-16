@@ -1,7 +1,6 @@
-export const InitalPromptBox = () => {
+import { TextField } from '@material-ui/core';
+export const InitalPromptBox = ({placeholder = "", }) => {
     return (
-        <>
-            <p>This is the inital prompt box</p>
-        </>
+        <TextField id="standard-basic" label="Standard" variant="standard" />
     );
 }
