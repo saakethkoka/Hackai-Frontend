@@ -74,15 +74,17 @@ const Question = ({
             label="Other"
             style={{ margin: '8px' }}
           />
-          <TextField
-            multiline={false}
-            rows={1}
-            disabled={!otherChecked}
-            value={otherInput}
-            onChange={handleOtherInputChange}
-            style={{ margin: '8px' }}
-            fullWidth
-          />
+          {otherChecked ? (
+            <TextField
+              multiline={false}
+              rows={1}
+              disabled={!otherChecked}
+              value={otherInput}
+              onChange={handleOtherInputChange}
+              style={{ margin: '8px' }}
+              fullWidth
+            />
+          ) : null}
         </RadioGroup>
       </FormControl>
     </div>
