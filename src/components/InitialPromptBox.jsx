@@ -25,7 +25,7 @@ export const InitialPromptBox = ({ onTextSubmit }) => {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
-                width: "70%",
+                width: "30%",  // Change width here
                 margin: "auto",
             }}
         >
@@ -48,5 +48,3 @@ export const InitialPromptBox = ({ onTextSubmit }) => {
         </Box>
     );
 };
-
-
