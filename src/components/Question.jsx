@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Typography, Radio, RadioGroup, FormControl, FormControlLabel, TextField } from '@mui/material';
 
 const Question = ({ question, choices, index, response, handleResponse }) => {
 
@@ -23,38 +24,37 @@ const Question = ({ question, choices, index, response, handleResponse }) => {
 
   return (
     <div>
-      <h3>{question}</h3>
-      <ul>
-        {choices.map((choice, i) => (
-          <li key={i}>
-            <label>
-              <input
-                type="radio"
-                value={choice}
-                checked={response === choice}
-                onChange={handleChange}
-              />
-              {choice}
-            </label>
-          </li>
-        ))}
-        <li>
-          <label>
-            <input
-              type="radio"
-              value="other"
-              checked={otherChecked}
-              onChange={handleChange}
+      <Typography variant="h5" gutterBottom>
+        {question}
+      </Typography>
+      <FormControl component="fieldset">
+        <RadioGroup
+          aria-label="quiz"
+          value={response}
+          onChange={handleChange}
+        >
+          {choices.map((choice, i) => (
+            <FormControlLabel
+              key={i}
+              value={choice}
+              control={<Radio />}
+              label={choice}
             />
-            Other:
-            <input
-              type="text"
-              value={otherInput}
-              onChange={handleOtherInputChange}
-            />
-          </label>
-        </li>
-      </ul>
+          ))}
+          <FormControlLabel
+            value="other"
+            control={<Radio />}
+            label="Other"
+          />
+          <TextField
+            multiline={false}
+            rows={1}
+            disabled={!otherChecked}
+            value={otherInput}
+            onChange={handleOtherInputChange}
+          />
+        </RadioGroup>
+      </FormControl>
     </div>
   );
 };

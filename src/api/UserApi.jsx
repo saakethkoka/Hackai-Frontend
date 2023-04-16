@@ -27,7 +27,6 @@ export const questionsAPI = (prompt) => {
         });
 }
 
-export const image = async () => {
-    const response = await axios.post(`${BASE_ENDPOINT}/image`);
-    return response.data;
+export const imageAPI = async () => {
+    return {"image": "https://i.insider.com/5df126b679d7570ad2044f3e?width=2000&format=jpeg&auto=webp"}
 }

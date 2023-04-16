@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import {ImageOutput, InitialPromptBox, QuestionsAndAnswerBox} from "../components";
-import {questionsAPI} from "../api/UserApi";
+import {questionsAPI, imageAPI} from "../api/UserApi";
 
 export const MainPage = () => {
     const [questions, setQuestions] = useState([]);
     const [responses, setResponses] = useState([]);
 
-
-    // useEffect(() => {
-    //     questionsAPI().then((data) => {
-    //         setQuestions(data.questions);
-    //         console.log(data);
-    //     });
-    // }, []);
+    const [image, setImage] = useState("");
 
     const [submittedText, setSubmittedText] = useState("");
 
@@ -20,6 +14,14 @@ export const MainPage = () => {
         questionsAPI(text).then((data) => {
             setQuestions(data.questions);
             console.log(data);
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(responses);
+        imageAPI().then((data) => {
+            setImage(data.image);
         });
     };
 
@@ -35,8 +37,8 @@ export const MainPage = () => {
                     </div>
                 )}
             </div>
-            {questions.length > 0 ? <QuestionsAndAnswerBox questions={questions} setResponses={setResponses} responses={responses}/> : <h1>Hi</h1>}
-            <ImageOutput />
+            {questions.length > 0 ? <QuestionsAndAnswerBox questions={questions} setResponses={setResponses} responses={responses} handleSubmit={handleSubmit} /> : <h1>Hi</h1>}
+            <ImageOutput imageURL={image}/>
         </>
     );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Question from './Question';
 
-export const QuestionsAndAnswerBox = ({ questions, setResponses, responses }) => {
+export const QuestionsAndAnswerBox = ({ questions, setResponses, responses, handleSubmit}) => {
 
 
     const handleResponse = (questionIndex, choice) => {
@@ -13,10 +13,7 @@ export const QuestionsAndAnswerBox = ({ questions, setResponses, responses }) =>
         setResponses(updatedResponses);
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(responses);
-    };
+    
 
     return (
         <form onSubmit={handleSubmit}>
