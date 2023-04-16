@@ -14,11 +14,29 @@ export const MainPage = () => {
         });
     }, []);
 
+    const [submittedText, setSubmittedText] = useState("");
+
+    const handleTextSubmit = (text) => {
+        setSubmittedText(text);
+        const response = questions(text);
+        console.log(response)
+    };
+
     return (
         <>
-            <InitalPromptBox />
-            <ImageOutput />
             {questions.length > 0 ? <QuestionsAndAnswerBox questions={questions} setResponses={setResponses} responses={responses}/> : <h1>Hi</h1>}
+            <div>
+                <h1>Text Input Component</h1>
+                <InitialPromptBox onTextSubmit={handleTextSubmit} />
+                {submittedText && (
+                    <div>
+                        <h2>Submitted Text:</h2>
+                        <p>{submittedText}</p>
+                    </div>
+                )}
+            </div>
+            <QuestionsAndAnswerBox />
+            <ImageOutput />
         </>
     );
 }

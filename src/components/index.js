@@ -1,3 +1,3 @@
 export * from './ImageOutput';
-export * from './InitalPromptBox';
+export * from './InitialPromptBox';
 export * from './QuestionsAndAnswerBox';
