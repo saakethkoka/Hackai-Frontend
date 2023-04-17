@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import {ImageOutput, InitialPromptBox, QuestionsAndAnswerBox,} from "../components";
+import {ImageOutput, InitialPromptBox, QuestionsAndAnswerBox, Background} from "../components";
 import { questionsAPI, imageAPI } from "../api/UserApi";
 import { Paper, CircularProgress } from "@mui/material";
 
 export const MainPage = () => {
+  const [prompt, setPrompt] = useState("");
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState([]);
   const [image, setImage] = useState("");
   const [submittedText, setSubmittedText] = useState("");
   const [submittedImage, setSubmittedImage] = useState("");
-  const [prompt, setPrompt] = useState("");
   const [imageUrls, setImageUrls] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -50,16 +50,8 @@ export const MainPage = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const backgroundStyle = {
-    background: "linear-gradient(to bottom, #a6c8ff, #fafcff)",
-  };
-
   return (
-    <div style={backgroundStyle}>
-      <Paper
-        elevation={2}
-        style={{ margin: "auto", padding: "50px", width: "60%" }}
-      >
+    <Background>
         <div style={{ textAlign: "center", paddingBottom: "40px" }}>
           <h1 style={{ paddingBottom: "20px" }}>
             What do you want an image of?
@@ -102,7 +94,6 @@ export const MainPage = () => {
             />
           ))}
         </div>
-      </Paper>
-    </div>
+    </Background>
   );
 };
