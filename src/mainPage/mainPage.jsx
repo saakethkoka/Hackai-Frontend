@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  ImageOutput,
-  InitialPromptBox,
-  QuestionsAndAnswerBox,
-} from "../components";
+import {ImageOutput, InitialPromptBox, QuestionsAndAnswerBox,} from "../components";
 import { questionsAPI, imageAPI } from "../api/UserApi";
 import { Paper, CircularProgress } from "@mui/material";
 

@@ -24,36 +24,36 @@ export const InitialPromptBox = ({ onTextSubmit }) => {
     }
   };
 
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "30%", // Change width here
-        margin: "auto",
-      }}
-    >
-      <TextField
-        label="Enter text"
-        value={inputText}
-        onChange={handleInputChange}
-        fullWidth
-        disabled={isImmutable}
-        onKeyDown={handleKeyDown}
-      />
-      {isImmutable === false && (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          sx={{ ml: 2 }}
-          disabled={isImmutable}
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%", // Change width here
+                height: "100vh", // Add height here
+            }}
         >
-          Submit
-        </Button>
-      )}
-    </Box>
-  );
+            <TextField
+                label="Enter text"
+                value={inputText}
+                onChange={handleInputChange}
+                fullWidth
+                disabled={isImmutable}
+                onKeyDown={handleKeyDown}
+                sx={{ mb: 2 }} // Add margin bottom here
+            />
+            {isImmutable === false && (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    disabled={isImmutable}
+                >
+                    Submit
+                </Button>
+            )}
+        </Box>
+    );
 };
